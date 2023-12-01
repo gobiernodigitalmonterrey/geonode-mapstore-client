@@ -24,7 +24,7 @@ import {
     isNewResource,
     getResourceId,
     getCompactPermissions,
-    canEditPermissions,
+    canManageResourcePermissions,
     getResourceData,
     getViewedResourceType
 } from '@js/selectors/resource';
@@ -179,7 +179,7 @@ const SharePlugin = connect(
         mapInfoSelector,
         getCompactPermissions,
         layersSelector,
-        canEditPermissions,
+        canManageResourcePermissions,
         getCurrentResourcePermissionsLoading,
         getResourceData,
         getViewedResourceType

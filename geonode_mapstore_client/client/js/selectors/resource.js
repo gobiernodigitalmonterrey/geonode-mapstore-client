@@ -117,6 +117,11 @@ export const canEditPermissions = (state) => {
     return ['owner', 'manage'].includes(permissions) || inheritsPerms(user, groups) || inheritsPerms(user, organizations);
 };
 
+export const canManageResourcePermissions = (state) => {
+    const perms = getResourcePerms(state);
+    return perms.includes('change_resourcebase_permissions');
+};
+
 export const getSelectedLayerPermissions = (state) => {
     const selectedLayerPermissions = state?.gnresource?.selectedLayerPermissions;
     return selectedLayerPermissions;
