@@ -136,7 +136,7 @@ Router.defaultProps = {
     plugins: {},
     locale: {
         messages: {},
-        current: 'en-US'
+        current: 'es-ES'
     },
     className: 'app-router fill',
     geoNodeConfiguration: {},

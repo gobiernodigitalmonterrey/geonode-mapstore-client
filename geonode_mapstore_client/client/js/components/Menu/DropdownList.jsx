@@ -186,7 +186,7 @@ DropdownList.propTypes = {
     noCaret: PropTypes.bool,
     dropdownClass: PropTypes.string,
     tabIndex: PropTypes.number,
-    badgeValue: PropTypes.number,
+    badgeValue: PropTypes.string,
     containerNode: PropTypes.element
 
 };

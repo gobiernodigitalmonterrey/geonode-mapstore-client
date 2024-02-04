@@ -72,6 +72,10 @@ function CatalogueRoute({
 
     const pluginsConfig = getPluginsConfiguration(name, propPluginsConfig);
 
+    // eslint-disable-next-line no-console
+    console.log('CatalogueRoute', pluginsConfig, propPluginsConfig, name, params, plugins);
+    // Niji
+
     const { plugins: loadedPlugins, pending } = useModulePlugins({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig

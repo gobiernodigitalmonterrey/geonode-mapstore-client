@@ -72,6 +72,24 @@ const DownloadButton = ({
         );
     }
 
+    if (_resource?.download_file_url) {
+        return (
+            <Component
+                {...isButton && { variant, size }}
+                {...showIcon && { tooltipId: "gnviewer.download" }}
+                download={`${_resource?.title}.${_resource?.extension}`}
+                href={ _resource?.download_file_url }
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {showIcon
+                    ? <FaIcon name={isExternal ? "external-link" : "download"} />
+                    : <Message msgId="gnviewer.download" />
+                }
+            </Component>
+        );
+    }
+
     return (
         <Component
             disabled={!!downloading}

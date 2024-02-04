@@ -117,6 +117,9 @@ getEndpoints()
         getAccountInfo()
     ])
         .then(([localConfig, user]) => {
+
+            console.log('localConfig', localConfig);
+
             setupConfiguration({
                 localConfig,
                 user
@@ -134,6 +137,7 @@ getEndpoints()
                 }) => {
                 // get the correct map layout
                     const mapLayout = getConfigProp('mapLayout') || {};
+
                     setConfigProp('mapLayout', mapLayout[query.theme] || mapLayout.viewer);
 
                     const appEpics = {

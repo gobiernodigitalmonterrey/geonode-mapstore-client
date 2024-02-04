@@ -6,25 +6,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useMemo } from 'react';
+import React, {useEffect, useMemo} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
 import url from 'url';
 import isArray from 'lodash/isArray';
-import { getMonitoredState } from '@mapstore/framework/utils/PluginsUtils';
-import { getConfigProp } from '@mapstore/framework/utils/ConfigUtils';
+import {getMonitoredState} from '@mapstore/framework/utils/PluginsUtils';
+import {getConfigProp} from '@mapstore/framework/utils/ConfigUtils';
 import PluginsContainer from '@mapstore/framework/components/plugins/PluginsContainer';
-import { requestResourceConfig, requestNewResourceConfig } from '@js/actions/gnresource';
+import {requestResourceConfig, requestNewResourceConfig} from '@js/actions/gnresource';
 import MetaTags from '@js/components/MetaTags';
 import MainEventView from '@js/components/MainEventView';
 import ViewerLayout from '@js/components/ViewerLayout';
-import { createShallowSelector } from '@mapstore/framework/utils/ReselectUtils';
-import { getResourceImageSource } from '@js/utils/ResourceUtils';
+import {createShallowSelector} from '@mapstore/framework/utils/ReselectUtils';
+import {getResourceImageSource} from '@js/utils/ResourceUtils';
 import useModulePlugins from '@mapstore/framework/hooks/useModulePlugins';
-import { getPlugins } from '@mapstore/framework/utils/ModulePluginsUtils';
+import {getPlugins} from '@mapstore/framework/utils/ModulePluginsUtils';
 
 const urlQuery = url.parse(window.location.href, true).query;
+
+// eslint-disable-next-line no-console
+console.log('urlQuery', urlQuery);
+// Niji
 
 const ConnectedPluginsContainer = connect(
     createShallowSelector(
@@ -48,7 +52,7 @@ function getPluginsConfiguration(name, pluginsConfig) {
     if (isArray(pluginsConfig)) {
         return pluginsConfig;
     }
-    const { isMobile } = getConfigProp('geoNodeSettings') || {};
+    const {isMobile} = getConfigProp('geoNodeSettings') || {};
     if (isMobile && pluginsConfig) {
         return pluginsConfig[`${name}_mobile`] || pluginsConfig[name] || DEFAULT_PLUGINS_CONFIG;
     }
@@ -60,7 +64,8 @@ function ViewerRoute({
     pluginsConfig: propPluginsConfig,
     params,
     onUpdate,
-    onCreate = () => {},
+    onCreate = () => {
+    },
     loaderComponent,
     plugins,
     match,
@@ -71,10 +76,25 @@ function ViewerRoute({
     configError
 }) {
 
-    const { pk } = match.params || {};
+    const extent = JSON.stringify(resource?.extent?.coords) || "";
+    const {pk} = match.params || {};
+
+
+
+
     const pluginsConfig = getPluginsConfiguration(name, propPluginsConfig);
 
-    const { plugins: loadedPlugins, pending } = useModulePlugins({
+    if (extent === "[-1,-1,0,0]") {
+        alert("tabular data");
+
+    }
+
+    console.log("Viewer", name, pk, resource);
+    console.log("extent", extent);
+    console.log("plugins", plugins);
+    console.log("pluginsConfig", pluginsConfig);
+
+    const {plugins: loadedPlugins, pending} = useModulePlugins({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig
     });
@@ -91,15 +111,18 @@ function ViewerRoute({
     }, [pending, pk]);
 
     const loading = loadingConfig || pending;
-    const parsedPlugins = useMemo(() => ({ ...loadedPlugins, ...getPlugins(plugins) }), [loadedPlugins]);
+    const parsedPlugins = useMemo(() => ({...loadedPlugins, ...getPlugins(plugins)}), [loadedPlugins]);
     const Loader = loaderComponent;
     const className = `page-${resourceType}-viewer`;
+
+    console.log("parsedPlugins", parsedPlugins);
 
     useEffect(() => {
         // set the correct height of navbar
         const mainHeader = document.querySelector('.gn-main-header');
         const mainHeaderPlaceholder = document.querySelector('.gn-main-header-placeholder');
         const topbar = document.querySelector('#gn-topbar');
+
         function resize() {
             if (mainHeaderPlaceholder && mainHeader) {
                 mainHeaderPlaceholder.style.height = mainHeader.clientHeight + 'px';
@@ -108,6 +131,7 @@ function ViewerRoute({
                 topbar.style.top = mainHeader.clientHeight + 'px';
             }
         }
+
         // hide the navigation bar if a resource is being viewed
         if (!loading) {
             document.getElementById('gn-topbar')?.classList.add('hide-navigation');
@@ -125,7 +149,7 @@ function ViewerRoute({
         <>
             {resource && <MetaTags
                 logo={() => getResourceImageSource(resource?.thumbnail_url)}
-                title={(resource?.title) ? `${resource?.title} - ${siteName}` : siteName }
+                title={(resource?.title) ? `${resource?.title} - ${siteName}` : siteName}
                 siteName={siteName}
                 contentURL={resource?.detail_url}
                 content={resource?.abstract}
@@ -140,7 +164,7 @@ function ViewerRoute({
                 allPlugins={plugins}
                 params={params}
             />}
-            {loading && Loader && <Loader />}
+            {loading && Loader && <Loader/>}
             {configError && <MainEventView msgId={configError}/>}
         </>
     );
@@ -165,7 +189,6 @@ const ConnectedViewerRoute = connect(
     {
         onUpdate: requestResourceConfig,
         onCreate: requestNewResourceConfig
-
     }
 )(ViewerRoute);
 
