@@ -26,10 +26,6 @@ import {getPlugins} from '@mapstore/framework/utils/ModulePluginsUtils';
 
 const urlQuery = url.parse(window.location.href, true).query;
 
-// eslint-disable-next-line no-console
-console.log('urlQuery', urlQuery);
-// Niji
-
 const ConnectedPluginsContainer = connect(
     createShallowSelector(
         state => urlQuery.mode || (urlQuery.mobile || state.browser && state.browser.mobile ? 'mobile' : 'desktop'),
@@ -79,25 +75,22 @@ function ViewerRoute({
     const extent = JSON.stringify(resource?.extent?.coords) || "";
     const {pk} = match.params || {};
 
-
-
-
     const pluginsConfig = getPluginsConfiguration(name, propPluginsConfig);
 
     if (extent === "[-1,-1,0,0]") {
-        alert("tabular data");
-
+        console.log("tabular data");
+        console.log("Viewer", name, pk, resource);
+        console.log("extent", extent);
+        console.log("plugins", plugins);
+        console.log("pluginsConfig", pluginsConfig);
     }
-
-    console.log("Viewer", name, pk, resource);
-    console.log("extent", extent);
-    console.log("plugins", plugins);
-    console.log("pluginsConfig", pluginsConfig);
 
     const {plugins: loadedPlugins, pending} = useModulePlugins({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig
     });
+    // eslint-disable-next-line no-console
+    console.log("loadedPlugins", loadedPlugins);
     useEffect(() => {
         if (!pending && pk !== undefined) {
             if (pk === 'new') {
