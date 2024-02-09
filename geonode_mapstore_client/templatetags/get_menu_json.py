@@ -131,7 +131,7 @@ def get_user_menu(context):
         "label": "Profile",
     }
 
-    logout = {"type": "link", "href": f"{settings.SOCIALACCOUNT_PROVIDER_LOGOUT_URL or '/account/logout/?next=/'}", "label": "Log out"}
+    logout = {"type": "link", "href": f"{settings.SOCIALACCOUNT_PROVIDER_LOGOUT_URL}", "label": "Log out"}
 
     if is_mobile:
         return [
