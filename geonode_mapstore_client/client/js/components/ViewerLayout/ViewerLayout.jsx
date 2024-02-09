@@ -19,14 +19,6 @@ function ViewerLayout({
     footer
 }) {
 
-    // eslint-disable-next-line no-console
-    console.log("id", id)
-    console.log("className", className)
-    console.log("header", header)
-    console.log("rightOverlay", rightOverlay)
-    console.log("children", children)
-    console.log("footer", footer)
-
     return (
         <div
             id={id}

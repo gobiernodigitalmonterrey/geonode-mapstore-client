@@ -78,10 +78,15 @@ function ViewerRoute({
     const pluginsConfig = getPluginsConfiguration(name, propPluginsConfig);
 
     if (extent === "[-1,-1,0,0]") {
+        // eslint-disable-next-line no-console
         console.log("tabular data");
+        // eslint-disable-next-line no-console
         console.log("Viewer", name, pk, resource);
+        // eslint-disable-next-line no-console
         console.log("extent", extent);
+        // eslint-disable-next-line no-console
         console.log("plugins", plugins);
+        // eslint-disable-next-line no-console
         console.log("pluginsConfig", pluginsConfig);
     }
 
@@ -108,6 +113,7 @@ function ViewerRoute({
     const Loader = loaderComponent;
     const className = `page-${resourceType}-viewer`;
 
+    // eslint-disable-next-line no-console
     console.log("parsedPlugins", parsedPlugins);
 
     useEffect(() => {
