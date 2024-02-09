@@ -119,7 +119,7 @@ def get_user_menu(context):
             {"label": "Register", "type": "link", "href": "/account/signup/?next=/"}
             if settings.ACCOUNT_OPEN_SIGNUP and not Configuration.load().read_only and not settings.SOCIALACCOUNT_OIDC_PROVIDER_ENABLED
             else None,
-            {"label": "Sign in", "type": "link", "href": f"{settings.SITEURL}/account/geonode_openid_connect/login/?process=login"},
+            {"label": "Sign in", "type": "link", "href": f"{settings.SITEURL}account/geonode_openid_connect/login/?process=login"},
 
         ]
     devider = {"type": "divider"}
