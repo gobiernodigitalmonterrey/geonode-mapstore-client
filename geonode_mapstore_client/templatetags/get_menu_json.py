@@ -38,18 +38,18 @@ def get_base_left_topbar_menu(context):
         {
             "type": "link",
             "href": "/catalogue/#/search/?f=dataset",
-            "label": "Datasets",
+            "label": "Conjuntos de datos",
         },
         {"type": "link", "href": "/catalogue/#/search/?f=map", "label": "Maps"},
         {
             "type": "link",
             "href": "/catalogue/#/search/?f=geostory",
-            "label": "GeoStories",
+            "label": "Historias",
         },
         {
             "type": "link",
             "href": "/catalogue/#/search/?f=dashboard",
-            "label": "Dashboards",
+            "label": "Tableros",
         },
         {
             "type": "link",

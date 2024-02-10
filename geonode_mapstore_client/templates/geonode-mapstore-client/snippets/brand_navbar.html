@@ -29,6 +29,12 @@
             <div class="gn-menu-content-left">
                 {% block left_menu %}
                 <ul class="gn-menu-list">
+                <li>
+                    <a href="https://www.monterrey.gob.mx" target="_blank" class="flex no-wrap" style="height: 64px; flex-shrink: 0;">
+                        <img src="https://micro.appsmty.gob.mx/img/gdm/mty_gdm_logo_iso.svg">
+                        <img src="https://micro.appsmty.gob.mx/img/gdm/mty_gdm_logo_tipo.svg">
+                    </a>
+                </li>
                     <li>
                         <a href="{% block logo_href %}{% catalogue_home %}{% endblock %}">
                             {% if custom_theme.logo and custom_theme.logo.url %}
