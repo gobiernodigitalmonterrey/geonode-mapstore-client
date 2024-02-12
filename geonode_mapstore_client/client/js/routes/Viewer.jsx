@@ -75,6 +75,7 @@ function ViewerRoute({
     const extent = JSON.stringify(resource?.extent?.coords) || "";
     const {pk} = match.params || {};
     let pluginsConfig = getPluginsConfiguration(name, propPluginsConfig);
+    console.log("resourceType", resourceType);
     console.log("pluginsConfig", pluginsConfig);
 
     console.log("Viewer", name, pk, resource);
@@ -535,6 +536,7 @@ function ViewerRoute({
             }
         ];
         pluginsConfig = tablePluginsConfig;
+        console.log("pluginsConfig table", pluginsConfig);
     }
 
     const {plugins: loadedPlugins, pending} = useModulePlugins({
