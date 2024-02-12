@@ -236,6 +236,8 @@ export function setMapThumbnail(bbox) {
 }
 
 export function requestResourceConfig(resourceType, pk, options) {
+    // eslint-disable-next-line no-console
+    console.log("requestResourceConfig", resourceType, pk, options);
     return {
         type: REQUEST_RESOURCE_CONFIG,
         resourceType,

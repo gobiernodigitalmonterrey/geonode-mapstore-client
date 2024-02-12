@@ -21,7 +21,7 @@ import {
 
 const itemElement = ({ labelId, href, badge, target }) =>  (
     <>
-        <NavLink href={href} target={target}>{labelId && <Message msgId={labelId} />}
+        <NavLink href={href} target={target} key={labelId}>{labelId && <Message msgId={labelId} />}
             { isValidBadgeValue(badge) && <Badge>{badge}</Badge>}
         </NavLink>
     </>);
@@ -31,7 +31,7 @@ const itemsList = (items) => (items && items.map((item) => {
     const { labelId, href, badge, target, type, Component, className } = item;
 
     if (type === 'plugin' && Component) {
-        return (<li><Component variant="default" className={className} showMessage /></li>);
+        return (<li key={labelId}><Component variant="default" className={className} showMessage /></li>);
     }
 
     return itemElement({ labelId, href, badge, target });
