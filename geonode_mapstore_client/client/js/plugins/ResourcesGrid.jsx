@@ -237,20 +237,22 @@ function ResourcesGrid({
                     labelId: 'gnhome.uploadDataset',
                     value: 'layer',
                     type: 'link',
-                    href: '{context.getCataloguePath("/catalogue/#/upload/dataset")}'
+                    href: '{context.getCataloguePath("/catalogue/#/upload/dataset")}',
+                    disableIf: "{(state('user') && !state('user').is_staff) ? true : false}"
                 },
                 {
                     labelId: 'gnhome.uploadDocument',
                     value: 'document',
                     type: 'link',
-                    href: '{context.getCataloguePath("/catalogue/#/upload/document")}'
+                    href: '{context.getCataloguePath("/catalogue/#/upload/document")}',
+                    disableIf: "{(state('user') && !state('user').is_staff) ? true : false}"
                 },
                 {
                     labelId: 'gnhome.createDataset',
                     value: 'layer',
                     type: 'link',
                     href: '/createlayer/',
-                    disableIf: "{(state('settings') && state('settings').createLayer) ? false : true}"
+                    disableIf: "{(state('user') && !state('user').is_staff) ? true : false}"
                 },
                 {
                     labelId: 'gnhome.createMap',
@@ -274,7 +276,8 @@ function ResourcesGrid({
                     labelId: 'gnhome.remoteServices',
                     value: 'remote',
                     type: 'link',
-                    href: '/services/?limit=5'
+                    href: '/services/?limit=5',
+                    disableIf: "{(state('user') && !state('user').is_staff) ? true : false}"
                 }
             ]
         },
@@ -442,7 +445,6 @@ function ResourcesGrid({
     filters,
     setFilters
 }, context) {
-
     const [_cardLayoutStyleState, setCardLayoutStyle] = useLocalStorage('layoutCardsStyle', defaultCardLayoutStyle);
     const cardLayoutStyleState = cardLayoutStyle || _cardLayoutStyleState; // Force style when `cardLayoutStyle` is configured
 
