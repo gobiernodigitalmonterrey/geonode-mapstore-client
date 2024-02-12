@@ -94,8 +94,6 @@ function ViewerRoute({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig
     });
-    // eslint-disable-next-line no-console
-    console.log("loadedPlugins", loadedPlugins);
     useEffect(() => {
         if (!pending && pk !== undefined) {
             if (pk === 'new') {
@@ -112,9 +110,6 @@ function ViewerRoute({
     const parsedPlugins = useMemo(() => ({...loadedPlugins, ...getPlugins(plugins)}), [loadedPlugins]);
     const Loader = loaderComponent;
     const className = `page-${resourceType}-viewer`;
-
-    // eslint-disable-next-line no-console
-    console.log("parsedPlugins", parsedPlugins);
 
     useEffect(() => {
         // set the correct height of navbar

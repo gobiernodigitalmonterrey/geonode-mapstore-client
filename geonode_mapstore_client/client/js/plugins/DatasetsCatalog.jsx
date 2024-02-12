@@ -47,12 +47,14 @@ function DatasetsCatalog({
 }) {
 
     const scrollContainer = useRef();
-    const [entries, setEntries] = useState([]);
+    let [entries, setEntries] = useState([]);
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [isNextPageAvailable, setIsNextPageAvailable] = useState(false);
     const [q, setQ] = useState('');
     const isMounted = useRef();
+
+    entries = entries.filter(el => JSON.stringify(el.extent.coords) !== JSON.stringify([-1, -1, 0, 0]));
 
     useInfiniteScroll({
         scrollContainer: scrollContainer.current,
