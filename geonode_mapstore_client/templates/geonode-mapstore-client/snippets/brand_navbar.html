@@ -36,7 +36,7 @@
                     </a>
                 </li>
                     <li>
-                        <a href="{% block logo_href %}{% catalogue_home %}{% endblock %}">
+                        <a href="{% block logo_href %}{% catalogue_home %}/{% endblock %}">
                             {% if custom_theme.logo and custom_theme.logo.url %}
                                 <img src="{{ custom_theme.logo.url }}">
                             {% else %}
