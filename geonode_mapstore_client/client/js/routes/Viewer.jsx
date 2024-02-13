@@ -22,7 +22,7 @@ import ViewerLayout from '@js/components/ViewerLayout';
 import {createShallowSelector} from '@mapstore/framework/utils/ReselectUtils';
 import {getResourceImageSource} from '@js/utils/ResourceUtils';
 import useModulePlugins from '@mapstore/framework/hooks/useModulePlugins';
-import {getPlugins, toModulePlugin} from '@mapstore/framework/utils/ModulePluginsUtils';
+import {getPlugins} from '@mapstore/framework/utils/ModulePluginsUtils';
 
 const urlQuery = url.parse(window.location.href, true).query;
 
@@ -52,12 +52,6 @@ function getPluginsConfiguration(name, pluginsConfig) {
     if (isMobile && pluginsConfig) {
         return pluginsConfig[`${name}_mobile`] || pluginsConfig[name] || DEFAULT_PLUGINS_CONFIG;
     }
-    // eslint-disable-next-line no-console
-    console.log("name", name);
-    // eslint-disable-next-line no-console
-    console.log("pluginsConfig[name]", pluginsConfig[name]);
-    // eslint-disable-next-line no-console
-    console.log("DEFAULT_PLUGINS_CONFIG", DEFAULT_PLUGINS_CONFIG);
     return pluginsConfig[name] || DEFAULT_PLUGINS_CONFIG;
 }
 
@@ -65,9 +59,8 @@ function ViewerRoute({
     name,
     pluginsConfig: propPluginsConfig,
     params,
-    onUpdate,
-    onCreate = () => {
-    },
+    onUpdate = () => {},
+    onCreate = () => {},
     loaderComponent,
     plugins,
     match,
@@ -80,22 +73,22 @@ function ViewerRoute({
 
     const extent = JSON.stringify(resource?.extent?.coords) || "";
     const {pk} = match.params || {};
-    let tablePluginsConfig = null;
 
     // eslint-disable-next-line no-console
-    console.log("1 - resourceType", resourceType);
+    console.log("loadingConfig", loadingConfig);
     // eslint-disable-next-line no-console
-    console.log("1 - plugins", plugins);
-    // eslint-disable-next-line no-console
-    console.log("1 - Viewer name, pk, resource", name, pk, resource);
+    console.log("resource", resource);
 
-    if (extent === "[-1,-1,0,0]") {
-        // eslint-disable-next-line no-console
-        console.log("tabular data");
-        // eslint-disable-next-line no-console
-        console.log("tabular data plugins", plugins);
+    let pluginsConfig;
 
-        tablePluginsConfig = [
+    console.log("pluginsConfig", propPluginsConfig);
+    let customPluginsConfig = null;
+
+    if (resource && extent === "[-1,-1,0,0]") {
+        // eslint-disable-next-line no-param-reassign
+        name = "dataset_edit_data_viewer";
+
+        customPluginsConfig = [
             {
                 "name": "ActionNavbar",
                 "cfg": {
@@ -135,12 +128,6 @@ function ViewerRoute({
                                     "type": "link",
                                     "href": "{context.getMetadataDetailUrl(state('gnResourceData'))}",
                                     "labelId": "gnviewer.viewMetadata"
-                                },
-                                {
-                                    "type": "link",
-                                    "href": "{'#/dataset/' + (state('gnResourceData') || {}).pk + '/edit/data'}",
-                                    "labelId": "gnviewer.viewData",
-                                    "disableIf": "{state('gnResourceData') && (state('gnResourceData').subtype === 'raster' || state('gnResourceData').subtype === 'remote')}"
                                 }
                             ]
                         },
@@ -151,26 +138,8 @@ function ViewerRoute({
                             "items": [
                                 {
                                     "type": "link",
-                                    "href": "{'#/dataset/' + (state('gnResourceData') || {}).pk + '/edit/data'}",
-                                    "labelId": "gnviewer.editData",
-                                    "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'change_dataset_data')}"
-                                },
-                                {
-                                    "type": "link",
-                                    "href": "{'#/dataset/' + (state('gnResourceData') || {}).pk + '/edit/style'}",
-                                    "labelId": "gnviewer.editStyle",
-                                    "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'change_dataset_style')}"
-                                },
-                                {
-                                    "type": "link",
                                     "href": "{context.getMetadataUrl(state('gnResourceData'))}",
                                     "labelId": "gnviewer.editMetadata"
-                                },
-                                {
-                                    "type": "link",
-                                    "href": "{'/datasets/' + (state('gnResourceData') || {}).alternate + '/style_upload'}",
-                                    "labelId": "gnviewer.styleUpload",
-                                    "disableIf": "{!context.resourceHasPermission(state('gnResourceData'), 'change_dataset_style')}"
                                 },
                                 {
                                     "type": "link",
@@ -182,14 +151,6 @@ function ViewerRoute({
                         {
                             "type": "plugin",
                             "name": "Share"
-                        },
-                        {
-                            "type": "plugin",
-                            "name": "Print"
-                        },
-                        {
-                            "type": "plugin",
-                            "name": "FilterLayer"
                         },
                         {
                             "labelId": "gnviewer.download",
@@ -229,8 +190,7 @@ function ViewerRoute({
                 "cfg": {
                     "hideCloseButton": true,
                     "hideLayerTitle": true,
-                    "enableMapFilterSync": false,
-                    "showFilteredObject": false
+                    "tabular": true
                 }
             },
             {
@@ -535,16 +495,16 @@ function ViewerRoute({
                 "name": "Notifications"
             }
         ];
-        // eslint-disable-next-line no-console
-        console.log("tabular data tablePluginsConfig", tablePluginsConfig);
     }
-    const pluginsConfig = tablePluginsConfig ? [...tablePluginsConfig] : getPluginsConfiguration(name, propPluginsConfig);
+
+    pluginsConfig = getPluginsConfiguration(name, customPluginsConfig || propPluginsConfig);
 
     const {plugins: loadedPlugins, pending} = useModulePlugins({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig
     });
-
+    console.log("loadingConfig", loadingConfig);
+    console.log("pending", pending);
     useEffect(() => {
         if (!pending && pk !== undefined) {
             if (pk === 'new') {
