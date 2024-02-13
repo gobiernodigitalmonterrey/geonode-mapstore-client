@@ -497,7 +497,7 @@ function ViewerRoute({
         ];
     }
 
-    pluginsConfig = getPluginsConfiguration(name, customPluginsConfig || propPluginsConfig);
+    pluginsConfig = getPluginsConfiguration(name, customPluginsConfig);
 
     const {plugins: loadedPlugins, pending} = useModulePlugins({
         pluginsEntries: getPlugins(plugins, 'module'),
