@@ -52,6 +52,12 @@ function getPluginsConfiguration(name, pluginsConfig) {
     if (isMobile && pluginsConfig) {
         return pluginsConfig[`${name}_mobile`] || pluginsConfig[name] || DEFAULT_PLUGINS_CONFIG;
     }
+    // eslint-disable-next-line no-console
+    console.log("name", name);
+    // eslint-disable-next-line no-console
+    console.log("pluginsConfig[name]", pluginsConfig[name]);
+    // eslint-disable-next-line no-console
+    console.log("DEFAULT_PLUGINS_CONFIG", DEFAULT_PLUGINS_CONFIG);
     return pluginsConfig[name] || DEFAULT_PLUGINS_CONFIG;
 }
 
@@ -74,28 +80,22 @@ function ViewerRoute({
 
     const extent = JSON.stringify(resource?.extent?.coords) || "";
     const {pk} = match.params || {};
-    let pluginsConfig = getPluginsConfiguration(name, propPluginsConfig);
-    console.log("resourceType", resourceType);
-    console.log("pluginsConfig", pluginsConfig);
+    let tablePluginsConfig = null;
 
-    console.log("Viewer", name, pk, resource);
+    // eslint-disable-next-line no-console
+    console.log("1 - resourceType", resourceType);
+    // eslint-disable-next-line no-console
+    console.log("1 - plugins", plugins);
+    // eslint-disable-next-line no-console
+    console.log("1 - Viewer name, pk, resource", name, pk, resource);
 
     if (extent === "[-1,-1,0,0]") {
         // eslint-disable-next-line no-console
         console.log("tabular data");
         // eslint-disable-next-line no-console
-        console.log("Viewer", name, pk, resource);
-        // eslint-disable-next-line no-console
-        console.log("extent", extent);
-        // eslint-disable-next-line no-console
-        console.log("plugins", plugins);
-        // eslint-disable-next-line no-console
-        console.log("pluginsConfig", pluginsConfig);
-        plugins.FeatureEditorPlugin = toModulePlugin(
-            'FeatureEditor',
-            () => import(/* webpackChunkName: 'plugins/feature-editor-plugin' */ '@mapstore/framework/plugins/FeatureEditor')
-        );
-        const tablePluginsConfig = [
+        console.log("tabular data plugins", plugins);
+
+        tablePluginsConfig = [
             {
                 "name": "ActionNavbar",
                 "cfg": {
@@ -535,14 +535,16 @@ function ViewerRoute({
                 "name": "Notifications"
             }
         ];
-        pluginsConfig = tablePluginsConfig;
-        console.log("pluginsConfig table", pluginsConfig);
+        // eslint-disable-next-line no-console
+        console.log("tabular data tablePluginsConfig", tablePluginsConfig);
     }
+    const pluginsConfig = tablePluginsConfig ? [...tablePluginsConfig] : getPluginsConfiguration(name, propPluginsConfig);
 
     const {plugins: loadedPlugins, pending} = useModulePlugins({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig
     });
+
     useEffect(() => {
         if (!pending && pk !== undefined) {
             if (pk === 'new') {
@@ -561,7 +563,7 @@ function ViewerRoute({
     const className = `page-${resourceType}-viewer`;
 
     useEffect(() => {
-        // set the correct height of navbar
+    // set the correct height of navbar
         const mainHeader = document.querySelector('.gn-main-header');
         const mainHeaderPlaceholder = document.querySelector('.gn-main-header-placeholder');
         const topbar = document.querySelector('#gn-topbar');
@@ -611,6 +613,8 @@ function ViewerRoute({
             {configError && <MainEventView msgId={configError}/>}
         </>
     );
+
+
 }
 
 ViewerRoute.propTypes = {
