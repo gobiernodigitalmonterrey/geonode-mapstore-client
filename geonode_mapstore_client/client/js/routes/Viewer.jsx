@@ -80,7 +80,7 @@ function ViewerRoute({
     console.log("resource", resource);
 
     let pluginsConfig;
-
+    console.log("loadingConfig", loadingConfig);
     console.log("pluginsConfig", propPluginsConfig);
     let customPluginsConfig = null;
 
@@ -503,8 +503,6 @@ function ViewerRoute({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig
     });
-    console.log("loadingConfig", loadingConfig);
-    console.log("pending", pending);
     useEffect(() => {
         if (!pending && pk !== undefined) {
             if (pk === 'new') {
