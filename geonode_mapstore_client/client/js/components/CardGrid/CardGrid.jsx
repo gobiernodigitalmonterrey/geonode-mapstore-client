@@ -147,6 +147,58 @@ const InfiniteScrollCardGrid = ({
 
     return (
         <div className="gn-card-grid">
+            <div className="row align-items-start contenedor-icon">
+                <div className="col contenedor-icon">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=infraestructura-pública&filter%7Bkeywords.slug.in%7D=movilidad">
+                        <div>
+                            <i className="fa fa-building"></i>
+                        </div>
+                        <div>
+                            Infraestructura pública y movilidad
+                        </div>
+                    </a>
+                </div>
+                <div className="col contenedor-icon">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=desarrollo-social&filter%7Bkeywords.slug.in%7D=desarrollo-humano&filter%7Bkeywords.slug.in%7D=participación_ciudadana&filter%7Bkeywords.slug.in%7D=seguridad&filter%7Bkeywords.slug.in%7D=bienestar-animal">
+                        <div>
+                            <i className="fa fa-male"></i>
+                        </div>
+                        <div>
+                            Desarrollo social y humano
+                        </div>
+                    </a>
+                </div>
+                <div className="col contenedor-icon">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=urbanismo&filter%7Bkeywords.slug.in%7D=riesgos&filter%7Bkeywords.slug.in%7D=división-territorial">
+                        <div>
+                            <i className="fa fa-home"></i>
+                        </div>
+                        <div>
+                            Territorio y vivienda
+                        </div>
+                    </a>
+                </div>
+                <div className="col contenedor-icon">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=economía&filter%7Bkeywords.slug.in%7D=finanzas&filter%7Bkeywords.slug.in%7D=infraestructura-pública">
+                        <div>
+                            <i className="fa fa-university"></i>
+                        </div>
+                        <div>
+                            Economía y administración gubernamental
+                        </div>
+                    </a>
+                </div>
+                <div className="col contenedor-icon">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=servicios_publicos&filter%7Bkeywords.slug.in%7D=salud&filter%7Bkeywords.slug.in%7D=medio_ambiente&filter%7Bkeywords.slug.in%7D=bienestar_animal">
+                        <div>
+                            <i className="fa fa-heartbeat"></i>
+                        </div>
+                        <div>
+                            Salud y medio ambiente
+                        </div>
+                    </a>
+                </div>
+            </div>
             <div style={{
                 display: 'flex',
                 width: '100%'
