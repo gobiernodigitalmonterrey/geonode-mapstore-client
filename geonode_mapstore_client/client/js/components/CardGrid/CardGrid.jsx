@@ -144,61 +144,61 @@ const InfiniteScrollCardGrid = ({
     });
 
     const hasResources = resources?.length > 0;
-
+    const path = window.location.pathname;
     return (
         <div className="gn-card-grid">
-            <div className="row align-items-start contenedor-icon">
-                <div className="col contenedor-icon">
+            {path === '/' && <div className="msgapi container">
+                <div className="column icono-texto">
                     <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=infraestructura-pública&filter%7Bkeywords.slug.in%7D=movilidad">
                         <div>
-                            <i className="fa fa-building"></i>
+                            <i className="fa fa-building icon-eje"></i>
                         </div>
-                        <div>
+                        <div className="texto">
                             Infraestructura pública y movilidad
                         </div>
                     </a>
                 </div>
-                <div className="col contenedor-icon">
+                <div className="column icono-texto">
                     <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=desarrollo-social&filter%7Bkeywords.slug.in%7D=desarrollo-humano&filter%7Bkeywords.slug.in%7D=participación_ciudadana&filter%7Bkeywords.slug.in%7D=seguridad&filter%7Bkeywords.slug.in%7D=bienestar-animal">
                         <div>
-                            <i className="fa fa-male"></i>
+                            <i className="fa fa-male icon-eje"></i>
                         </div>
-                        <div>
+                        <div className="texto">
                             Desarrollo social y humano
                         </div>
                     </a>
                 </div>
-                <div className="col contenedor-icon">
+                <div className="column icono-texto">
                     <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=urbanismo&filter%7Bkeywords.slug.in%7D=riesgos&filter%7Bkeywords.slug.in%7D=división-territorial">
                         <div>
-                            <i className="fa fa-home"></i>
+                            <i className="fa fa-home icon-eje"></i>
                         </div>
-                        <div>
+                        <div className="texto">
                             Territorio y vivienda
                         </div>
                     </a>
                 </div>
-                <div className="col contenedor-icon">
+                <div className="column icono-texto">
                     <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=economía&filter%7Bkeywords.slug.in%7D=finanzas&filter%7Bkeywords.slug.in%7D=infraestructura-pública">
                         <div>
-                            <i className="fa fa-university"></i>
+                            <i className="fa fa-university icon-eje"></i>
                         </div>
-                        <div>
+                        <div className="texto">
                             Economía y administración gubernamental
                         </div>
                     </a>
                 </div>
-                <div className="col contenedor-icon">
+                <div className="column icono-texto">
                     <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=servicios_publicos&filter%7Bkeywords.slug.in%7D=salud&filter%7Bkeywords.slug.in%7D=medio_ambiente&filter%7Bkeywords.slug.in%7D=bienestar_animal">
                         <div>
-                            <i className="fa fa-heartbeat"></i>
+                            <i className="fa fa-heartbeat icon-eje"></i>
                         </div>
-                        <div>
+                        <div className="texto">
                             Salud y medio ambiente
                         </div>
                     </a>
                 </div>
-            </div>
+            </div>}
             <div style={{
                 display: 'flex',
                 width: '100%'
