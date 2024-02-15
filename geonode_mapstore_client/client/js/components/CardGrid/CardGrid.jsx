@@ -145,11 +145,12 @@ const InfiniteScrollCardGrid = ({
 
     const hasResources = resources?.length > 0;
     const path = window.location.pathname;
+
     return (
         <div className="gn-card-grid">
             {path === '/' && <div className="msgapi container">
                 <div className="column icono-texto">
-                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=infraestructura-pública&filter%7Bkeywords.slug.in%7D=movilidad">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=Infraestructura_pública&filter%7Bkeywords.slug.in%7D=Movilidad">
                         <div>
                             <i className="fa fa-building icon-eje"></i>
                         </div>
@@ -159,7 +160,7 @@ const InfiniteScrollCardGrid = ({
                     </a>
                 </div>
                 <div className="column icono-texto">
-                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=desarrollo-social&filter%7Bkeywords.slug.in%7D=desarrollo-humano&filter%7Bkeywords.slug.in%7D=participación_ciudadana&filter%7Bkeywords.slug.in%7D=seguridad&filter%7Bkeywords.slug.in%7D=bienestar-animal">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=Desarrollo_social&filter%7Bkeywords.slug.in%7D=Desarrollo_humano&filter%7Bkeywords.slug.in%7D=Participación_ciudadana&filter%7Bkeywords.slug.in%7D=Seguridad&filter%7Bkeywords.slug.in%7D=Bienestar_animal">
                         <div>
                             <i className="fa fa-male icon-eje"></i>
                         </div>
@@ -169,7 +170,7 @@ const InfiniteScrollCardGrid = ({
                     </a>
                 </div>
                 <div className="column icono-texto">
-                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=urbanismo&filter%7Bkeywords.slug.in%7D=riesgos&filter%7Bkeywords.slug.in%7D=división-territorial">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=Urbanismo&filter%7Bkeywords.slug.in%7D=Riesgos&filter%7Bkeywords.slug.in%7D=División_territorial">
                         <div>
                             <i className="fa fa-home icon-eje"></i>
                         </div>
@@ -179,7 +180,7 @@ const InfiniteScrollCardGrid = ({
                     </a>
                 </div>
                 <div className="column icono-texto">
-                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=economía&filter%7Bkeywords.slug.in%7D=finanzas&filter%7Bkeywords.slug.in%7D=infraestructura-pública">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=Economía&filter%7Bkeywords.slug.in%7D=Finanzas&filter%7Bkeywords.slug.in%7D=Infraestructura_pública">
                         <div>
                             <i className="fa fa-university icon-eje"></i>
                         </div>
@@ -189,7 +190,7 @@ const InfiniteScrollCardGrid = ({
                     </a>
                 </div>
                 <div className="column icono-texto">
-                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=servicios_publicos&filter%7Bkeywords.slug.in%7D=salud&filter%7Bkeywords.slug.in%7D=medio_ambiente&filter%7Bkeywords.slug.in%7D=bienestar_animal">
+                    <a href="catalogue/#/?filter%7Bkeywords.slug.in%7D=Servicios_públicos&filter%7Bkeywords.slug.in%7D=Salud&filter%7Bkeywords.slug.in%7D=Medio_ambiente&filter%7Bkeywords.slug.in%7D=Bienestar_animal">
                         <div>
                             <i className="fa fa-heartbeat icon-eje"></i>
                         </div>
