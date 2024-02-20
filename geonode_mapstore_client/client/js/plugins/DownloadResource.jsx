@@ -55,11 +55,12 @@ const DownloadButton = ({
     }
 
     if (isNotAjaxSafe) {
+        const filename = downloadInfo?.url?.split('/').pop();
         return (
             <Component
                 {...isButton && { variant, size }}
                 {...showIcon && { tooltipId: "gnviewer.download" }}
-                download={`${_resource?.title}.${_resource?.extension}`}
+                download={`${filename}`}
                 href={ downloadInfo.url }
                 target="_blank"
                 rel="noopener noreferrer"
