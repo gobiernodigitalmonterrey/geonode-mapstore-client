@@ -56,6 +56,7 @@ const DownloadButton = ({
 
     if (isNotAjaxSafe) {
         const filename = downloadInfo?.url?.split('/').pop();
+        // download={`${filename}.${_resource?.extension}`}
         return (
             <Component
                 {...isButton && { variant, size }}
