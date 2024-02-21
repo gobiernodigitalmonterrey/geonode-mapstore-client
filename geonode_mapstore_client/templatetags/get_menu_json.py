@@ -55,14 +55,13 @@ def get_base_left_topbar_menu(context):
             "type": "link",
             "href": "/catalogue/#/search/?f=document",
             "label": "Documents",
-        }
+        },
         {
             "type": "link",
             "href": "/catalogue/#/search/?f=featured",
             "label": "Featured",
         },
     ]
-
 
 @register.simple_tag(takes_context=True)
 def get_base_right_topbar_menu(context):
