@@ -1,27 +1,32 @@
 {
-  "_from": "web-ifc@^0.0.39",
+  "_args": [
+    [
+      "web-ifc@0.0.39",
+      "C:\\Users\\Niji\\PycharmProjects\\geonode-mapstore-client\\geonode_mapstore_client\\client"
+    ]
+  ],
+  "_from": "web-ifc@0.0.39",
   "_id": "web-ifc@0.0.39",
   "_inBundle": false,
   "_integrity": "sha512-sg+DyxDiyXBqlXXbz+uSqw8IGX+mVvHmn2+hg6UXDvAcrzJJw8EI2H4ZzlxWxCqqdpGVeK0wCpdeQm43UCDbrA==",
   "_location": "/web-ifc",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "web-ifc@^0.0.39",
+    "raw": "web-ifc@0.0.39",
     "name": "web-ifc",
     "escapedName": "web-ifc",
-    "rawSpec": "^0.0.39",
+    "rawSpec": "0.0.39",
     "saveSpec": null,
-    "fetchSpec": "^0.0.39"
+    "fetchSpec": "0.0.39"
   },
   "_requiredBy": [
     "/web-ifc-three"
   ],
   "_resolved": "https://registry.npmjs.org/web-ifc/-/web-ifc-0.0.39.tgz",
-  "_shasum": "c3c7e9b16aad79f8ad78e346671cb5b854480737",
-  "_spec": "web-ifc@^0.0.39",
-  "_where": "C:\\Users\\cesar.benjamin\\PycharmProjects\\geonode-mapstore-client\\geonode_mapstore_client\\client\\node_modules\\web-ifc-three",
+  "_spec": "0.0.39",
+  "_where": "C:\\Users\\Niji\\PycharmProjects\\geonode-mapstore-client\\geonode_mapstore_client\\client",
   "author": {
     "name": "tomvandig"
   },
@@ -30,8 +35,6 @@
     "path": false,
     "fs": false
   },
-  "bundleDependencies": false,
-  "deprecated": false,
   "description": "ifc loading on the web",
   "devDependencies": {
     "@types/jest": "^27.0.3",

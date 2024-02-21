@@ -75,11 +75,12 @@ const DownloadButton = ({
     }
 
     if (_resource?.download_file_url) {
+        const filename = _resource?.download_file_url?.split('/').pop();
         return (
             <Component
                 {...isButton && { variant, size }}
                 {...showIcon && { tooltipId: "gnviewer.download" }}
-                download={`${_resource?.title}.${_resource?.extension}`}
+                download={`${filename}`}
                 href={ _resource?.download_file_url }
                 target="_blank"
                 rel="noopener noreferrer"
