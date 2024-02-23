@@ -91,7 +91,7 @@ function ViewerRoute({
     }, [pending, pk]);
 
     const loading = loadingConfig || pending;
-    const parsedPlugins = useMemo(() => ({ ...loadedPlugins, ...getPlugins(plugins) }), [loadedPlugins]);
+    const parsedPlugins = useMemo(() => ({ ...loadedPlugins, ...getPlugins(plugins) }), [plugins, loadedPlugins]);
     const Loader = loaderComponent;
     const className = `page-${resourceType}-viewer`;
 
