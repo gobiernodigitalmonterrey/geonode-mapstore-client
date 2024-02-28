@@ -119,8 +119,7 @@ def get_user_menu(context):
             {"label": "Register", "type": "link", "href": "/account/signup/?next=/"}
             if settings.ACCOUNT_OPEN_SIGNUP and not Configuration.load().read_only and not settings.SOCIALACCOUNT_OIDC_PROVIDER_ENABLED
             else None,
-            {"label": "Acceder", "type": "link", "href": f"{settings.SITEURL}account/{settings.SOCIALACCOUNT_OIDC_PROVIDER}/login/?process=login"},
-
+            {"label": "Acceder", "type": "link", "href": f"{settings.SITEURL}account/{settings.SOCIALACCOUNT_OIDC_PROVIDER}/login/?process=login"} if settings.SOCIALACCOUNT_OIDC_PROVIDER_ENABLED else {"label": "Acceder", "type": "link", "href": f"{settings.SITEURL}account/login/?process=login"},
         ]
     devider = {"type": "divider"}
 
