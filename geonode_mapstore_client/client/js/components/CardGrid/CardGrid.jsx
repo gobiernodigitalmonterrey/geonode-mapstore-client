@@ -144,9 +144,62 @@ const InfiniteScrollCardGrid = ({
     });
 
     const hasResources = resources?.length > 0;
+    const path = window.location.pathname;
 
     return (
         <div className="gn-card-grid">
+            {path === '/' && <div className="msgapi container">
+                <div className="column icono-texto">
+                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=infraestructura_pública&filter{keywords.slug.in}=movilidad">
+                        <div>
+                            <i className="fa fa-building icon-eje"></i>
+                        </div>
+                        <div className="texto">
+                            Infraestructura pública y movilidad
+                        </div>
+                    </a>
+                </div>
+                <div className="column icono-texto">
+                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=desarrollo_social&filter{keywords.slug.in}=desarrollo_humano&filter{keywords.slug.in}=participación_ciudadana&filter{keywords.slug.in}=seguridad&filter{keywords.slug.in}=bienestar_animal">
+                        <div>
+                            <i className="fa fa-male icon-eje"></i>
+                        </div>
+                        <div className="texto">
+                            Desarrollo social y humano
+                        </div>
+                    </a>
+                </div>
+                <div className="column icono-texto">
+                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=urbanismo&filter{keywords.slug.in}=división_territorial&filter{keywords.slug.in}=riesgos">
+                        <div>
+                            <i className="fa fa-home icon-eje"></i>
+                        </div>
+                        <div className="texto">
+                            Territorio y vivienda
+                        </div>
+                    </a>
+                </div>
+                <div className="column icono-texto">
+                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=economía&filter{keywords.slug.in}=finanzas&filter{keywords.slug.in}=infraestructura_pública">
+                        <div>
+                            <i className="fa fa-university icon-eje"></i>
+                        </div>
+                        <div className="texto">
+                            Economía y administración gubernamental
+                        </div>
+                    </a>
+                </div>
+                <div className="column icono-texto">
+                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=servicios_públicos&filter{keywords.slug.in}=salud&filter{keywords.slug.in}=medio_ambiente&filter{keywords.slug.in}=bienestar_animal">
+                        <div>
+                            <i className="fa fa-heartbeat icon-eje"></i>
+                        </div>
+                        <div className="texto">
+                            Salud y medio ambiente
+                        </div>
+                    </a>
+                </div>
+            </div>}
             <div style={{
                 display: 'flex',
                 width: '100%'

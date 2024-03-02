@@ -118,7 +118,6 @@ getEndpoints()
     ])
         .then(([localConfig, user]) => {
 
-            console.log('localConfig', localConfig);
 
             setupConfiguration({
                 localConfig,
