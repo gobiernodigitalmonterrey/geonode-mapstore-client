@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -71,13 +71,17 @@ function ViewerRoute({
     configError
 }) {
 
-    const { pk } = match.params || {};
-    const pluginsConfig = getPluginsConfiguration(name, propPluginsConfig);
+    const { pk } = match.params || {}; // Se extrae pk de match.params. Si match.params es undefined o null, pk será undefined.
+    const pluginsConfig = getPluginsConfiguration(name, propPluginsConfig); // Se obtiene la configuración de los plugins.
 
     const { plugins: loadedPlugins, pending } = useModulePlugins({
         pluginsEntries: getPlugins(plugins, 'module'),
         pluginsConfig
-    });
+    }); // Se obtienen los plugins.
+
+    const loading = loadingConfig || pending; // Se obtiene loading.
+    const parsedPlugins = { ...loadedPlugins, ...getPlugins(plugins) };
+
     useEffect(() => {
         if (!pending && pk !== undefined) {
             if (pk === 'new') {
@@ -88,10 +92,8 @@ function ViewerRoute({
                 });
             }
         }
-    }, [pending, pk]);
+    }, [pending, pk]); // Se ejecuta onUpdate o onCreate si pk es diferente de undefined.
 
-    const loading = loadingConfig || pending;
-    const parsedPlugins = useMemo(() => ({ ...loadedPlugins, ...getPlugins(plugins) }), [plugins, loadedPlugins]);
     const Loader = loaderComponent;
     const className = `page-${resourceType}-viewer`;
 
