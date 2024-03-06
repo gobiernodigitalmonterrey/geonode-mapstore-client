@@ -30,6 +30,7 @@ const mediaMap = {
     gltf: Scene3DViewer,
     pcd: Scene3DViewer,
     ifc: Scene3DViewer,
+    audio: MediaComponent,
     unsupported: UnsupportedViewer
 };
 
