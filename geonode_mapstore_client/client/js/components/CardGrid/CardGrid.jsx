@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Spinner from '@js/components/Spinner';
 import HTML from '@mapstore/framework/components/I18N/HTML';
 import FaIcon from '@js/components/FaIcon';
@@ -145,6 +145,20 @@ const InfiniteScrollCardGrid = ({
 
     const hasResources = resources?.length > 0;
     const path = window.location.pathname;
+    const [axisTexts, setAxisTexts] = useState([]);
+
+
+    useEffect(() => {
+        fetch('https://mide.gce.dev.appsmty.gob.mx/api/v2/datasets')
+            .then(response => response.json())
+            .then(data => {
+                setAxisTexts(data.axisTexts);
+            })
+            .catch(error => {
+                console.error('Error al obtener los textos de los ejes:', error);
+            });
+    }, []);
+
 
     return (
         <div className="gn-card-grid">
@@ -155,6 +169,7 @@ const InfiniteScrollCardGrid = ({
                             <i className="fa fa-building icon-eje"></i>
                         </div>
                         <div className="texto">
+                            {setAxisTexts}
                             Infraestructura pública y movilidad
                         </div>
                     </a>
