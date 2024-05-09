@@ -165,21 +165,18 @@ const InfiniteScrollCardGrid = ({
         }
     };
 
-    const FiltrarEtiquetaDataset = (datasets) => {
+    const filtrarEtiquetaDataset = (datasets) => {
         return datasets.filter(objeto => objeto.keywords.find(
-            keyword => keyword.name.toLowerCase() === 'ejes-tematicos'
-        ))
-        console.log(datasetsEjesTematicos)
-
-    }
+            keyword => keyword.name.toLowerCase() === 'ejes-tematicos' && keyword.name.toLowerCase() === 'tabular'
+        ));
+    };
 
     useEffect(() => {
-        axios.get('https://mide.gce.dev.appsmty.gob.mx/api/v2/datasets')
+        axios.get('https://admide.monterrey.gob.mx/api/v2/datasets')
             .then(res => {
-                if(res.status === 200){
-                    const ejeTematico = FiltrarEtiquetaDataset(res.data.datasets);
-                    console.log(ejeTematico[0].alternate, 'eje')
-                    axios.get(`https://mide.gce.dev.appsmty.gob.mx/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=geonode:tabla_etiquetas&outputFormat=application/json`)
+                if (res.status === 200) {
+                    const ejeTematico = filtrarEtiquetaDataset(res.data.datasets);
+                    axios.get(`https://admide.monterrey.gob.mx/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=${ejeTematico[0].alternate}&outputFormat=application/json`)
                         .then(response => {
                             const nuevosDatos = filtrarDatosPeticion(response.data);
                             setDatosNuevos(nuevosDatos);
@@ -188,7 +185,7 @@ const InfiniteScrollCardGrid = ({
                             console.error('Error al obtener los textos de los ejes:', error);
                         });
                 }
-            })
+            });
     }, []);
 
     return (
