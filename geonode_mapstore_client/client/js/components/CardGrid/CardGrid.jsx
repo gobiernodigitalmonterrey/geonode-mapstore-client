@@ -165,15 +165,30 @@ const InfiniteScrollCardGrid = ({
         }
     };
 
+    const FiltrarEtiquetaDataset = (datasets) => {
+        return datasets.filter(objeto => objeto.keywords.find(
+            keyword => keyword.name.toLowerCase() === 'ejes-tematicos'
+        ))
+        console.log(datasetsEjesTematicos)
+
+    }
+
     useEffect(() => {
-        axios.get('https://mide.gce.dev.appsmty.gob.mx/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=geonode:tabla_etiquetas&outputFormat=application/json')
-            .then(response => {
-                const nuevosDatos = filtrarDatosPeticion(response.data);
-                setDatosNuevos(nuevosDatos);
+        axios.get('https://mide.gce.dev.appsmty.gob.mx/api/v2/datasets')
+            .then(res => {
+                if(res.status === 200){
+                    const ejeTematico = FiltrarEtiquetaDataset(res.data.datasets);
+                    console.log(ejeTematico[0].alternate, 'eje')
+                    axios.get(`https://mide.gce.dev.appsmty.gob.mx/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=geonode:tabla_etiquetas&outputFormat=application/json`)
+                        .then(response => {
+                            const nuevosDatos = filtrarDatosPeticion(response.data);
+                            setDatosNuevos(nuevosDatos);
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener los textos de los ejes:', error);
+                        });
+                }
             })
-            .catch(error => {
-                console.error('Error al obtener los textos de los ejes:', error);
-            });
     }, []);
 
     return (
