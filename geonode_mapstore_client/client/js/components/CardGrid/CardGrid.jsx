@@ -166,17 +166,20 @@ const InfiniteScrollCardGrid = ({
     };
 
     const filtrarEtiquetaDataset = (datasets) => {
-        return datasets.filter(objeto => objeto.keywords.find(
-            keyword => keyword.name.toLowerCase() === 'ejes-tematicos' && keyword.name.toLowerCase() === 'tabular'
+        let tabulares =  datasets.filter(objeto => objeto.keywords.find(
+            keyword => keyword.name.toLowerCase() === 'tabular'
+        ));
+        return tabulares.filter(object => object.keywords.find(
+            keyword => keyword.name.toLowerCase() === 'ejes-tematicos'
         ));
     };
 
     useEffect(() => {
-        axios.get('https://admide.monterrey.gob.mx/api/v2/datasets')
+        axios.get('https://mide.gce.dev.appsmty.gob.mx/api/v2/datasets')
             .then(res => {
                 if (res.status === 200) {
                     const ejeTematico = filtrarEtiquetaDataset(res.data.datasets);
-                    axios.get(`https://admide.monterrey.gob.mx/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=${ejeTematico[0].alternate}&outputFormat=application/json`)
+                    axios.get(`https://mide.gce.dev.appsmty.gob.mx/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=${ejeTematico[0].alternate}&outputFormat=application/json`)
                         .then(response => {
                             const nuevosDatos = filtrarDatosPeticion(response.data);
                             setDatosNuevos(nuevosDatos);
