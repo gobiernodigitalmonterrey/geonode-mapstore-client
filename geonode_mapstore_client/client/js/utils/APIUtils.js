@@ -48,7 +48,7 @@ export const getGeoNodeLocalConfig = (path = '', defaultValue = undefined) => {
 
 let geoNodeTargetHostname;
 
-const getGeoNodeTargetHostname = () => {
+export const getGeoNodeTargetHostname = () => {
     if (geoNodeTargetHostname) {
         return geoNodeTargetHostname;
     }

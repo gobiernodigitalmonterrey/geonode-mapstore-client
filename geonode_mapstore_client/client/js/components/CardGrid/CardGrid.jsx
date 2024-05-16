@@ -16,7 +16,7 @@ import useInfiniteScroll from '@js/hooks/useInfiniteScroll';
 import {getResourceStatuses} from '@js/utils/ResourceUtils';
 import MainLoader from '@js/components/MainLoader';
 import axios from 'axios';
-
+import {getConfigProp} from "../../../MapStore2/web/client/utils/ConfigUtils";
 
 const Cards = withResizeDetector(({
     resources,
@@ -166,6 +166,7 @@ const InfiniteScrollCardGrid = ({
     };
 
     const filtrarEtiquetaDataset = (datasets) => {
+
         let tabulares =  datasets.filter(objeto => objeto.keywords.find(
             keyword => keyword.name.toLowerCase() === 'tabular'
         ));
@@ -173,13 +174,13 @@ const InfiniteScrollCardGrid = ({
             keyword => keyword.name.toLowerCase() === 'ejes-tematicos'
         ));
     };
-
     useEffect(() => {
-        axios.get('https://admide.monterrey.gob.mx/api/v2/datasets')
+        let geonodeUrl = getConfigProp('geoNodeSettings')?.geonodeUrl || '';
+        axios.get(geonodeUrl + 'api/v2/datasets')
             .then(res => {
                 if (res.status === 200) {
                     const ejeTematico = filtrarEtiquetaDataset(res.data.datasets);
-                    axios.get(`https://admide.monterrey.gob.mx/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=${ejeTematico[0].alternate}&outputFormat=application/json`)
+                    axios.get(geonodeUrl + `geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=${ejeTematico[0].alternate}&outputFormat=application/json`)
                         .then(response => {
                             const nuevosDatos = filtrarDatosPeticion(response.data);
                             setDatosNuevos(nuevosDatos);
