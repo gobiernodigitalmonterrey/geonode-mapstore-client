@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Spinner from '@js/components/Spinner';
 import HTML from '@mapstore/framework/components/I18N/HTML';
 import FaIcon from '@js/components/FaIcon';
@@ -15,6 +15,8 @@ import {withResizeDetector} from 'react-resize-detector';
 import useInfiniteScroll from '@js/hooks/useInfiniteScroll';
 import {getResourceStatuses} from '@js/utils/ResourceUtils';
 import MainLoader from '@js/components/MainLoader';
+import axios from 'axios';
+import {getConfigProp} from "../../../MapStore2/web/client/utils/ConfigUtils";
 
 const Cards = withResizeDetector(({
     resources,
@@ -145,61 +147,69 @@ const InfiniteScrollCardGrid = ({
 
     const hasResources = resources?.length > 0;
     const path = window.location.pathname;
+    const [datosNuevos, setDatosNuevos] = useState(null);
+
+    // eslint-disable-next-line consistent-return
+    const filtrarDatosPeticion = (datos) => {
+        if (datos) {
+            return datos.features.map(dataset => {
+                const palabras = dataset.properties.etiquetas.split(',');
+                const filters = palabras.map(keyword => `filter{keywords.slug.in}=${keyword}`).join('&');
+                return {
+                    properties: {
+                        ...dataset.properties,
+                        etiquetas: filters
+                    }
+                };
+            });
+        }
+    };
+
+    const filtrarEtiquetaDataset = (datasets) => {
+
+        let tabulares =  datasets.filter(objeto => objeto.keywords.find(
+            keyword => keyword.name.toLowerCase() === 'tabular'
+        ));
+        return tabulares.filter(object => object.keywords.find(
+            keyword => keyword.name.toLowerCase() === 'ejes-tematicos'
+        ));
+    };
+    useEffect(() => {
+        let geonodeUrl = getConfigProp('geoNodeSettings')?.geonodeUrl || '';
+        axios.get(geonodeUrl + 'api/v2/datasets')
+            .then(res => {
+                if (res.status === 200) {
+                    const ejeTematico = filtrarEtiquetaDataset(res.data.datasets);
+                    axios.get(geonodeUrl + `geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=${ejeTematico[0].alternate}&outputFormat=application/json`)
+                        .then(response => {
+                            const nuevosDatos = filtrarDatosPeticion(response.data);
+                            setDatosNuevos(nuevosDatos);
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener los textos de los ejes:', error);
+                        });
+                }
+            });
+    }, []);
 
     return (
         <div className="gn-card-grid">
-            {path === '/' && <div className="msgapi container">
-                <div className="column icono-texto">
-                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=infraestructura_pública&filter{keywords.slug.in}=movilidad">
-                        <div>
-                            <i className="fa fa-building icon-eje"></i>
+            {path === '/' && (
+                <div className="msgapi container">
+                    {datosNuevos && datosNuevos.map((dataset, index) => (
+                        <div className="column icono-texto" key={index}>
+                            <a href={`catalogue/#/?f=dataset&f=map&${dataset.properties.etiquetas}`}>
+                                <div>
+                                    <i className={`fa ${dataset.properties.icono} icon-eje`}></i>
+                                </div>
+                                <div className="texto">
+                                    {dataset.properties.titulo}
+                                </div>
+                            </a>
                         </div>
-                        <div className="texto">
-                            Infraestructura pública y movilidad
-                        </div>
-                    </a>
+                    ))}
                 </div>
-                <div className="column icono-texto">
-                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=desarrollo_social&filter{keywords.slug.in}=desarrollo_humano&filter{keywords.slug.in}=participación_ciudadana&filter{keywords.slug.in}=seguridad&filter{keywords.slug.in}=bienestar_animal">
-                        <div>
-                            <i className="fa fa-male icon-eje"></i>
-                        </div>
-                        <div className="texto">
-                            Desarrollo social y humano
-                        </div>
-                    </a>
-                </div>
-                <div className="column icono-texto">
-                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=urbanismo&filter{keywords.slug.in}=división_territorial&filter{keywords.slug.in}=riesgos">
-                        <div>
-                            <i className="fa fa-home icon-eje"></i>
-                        </div>
-                        <div className="texto">
-                            Territorio y vivienda
-                        </div>
-                    </a>
-                </div>
-                <div className="column icono-texto">
-                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=economía&filter{keywords.slug.in}=finanzas&filter{keywords.slug.in}=infraestructura_pública">
-                        <div>
-                            <i className="fa fa-university icon-eje"></i>
-                        </div>
-                        <div className="texto">
-                            Economía y administración gubernamental
-                        </div>
-                    </a>
-                </div>
-                <div className="column icono-texto">
-                    <a href="catalogue/#/?f=dataset&f=map&filter{keywords.slug.in}=servicios_públicos&filter{keywords.slug.in}=salud&filter{keywords.slug.in}=medio_ambiente&filter{keywords.slug.in}=bienestar_animal">
-                        <div>
-                            <i className="fa fa-heartbeat icon-eje"></i>
-                        </div>
-                        <div className="texto">
-                            Salud y medio ambiente
-                        </div>
-                    </a>
-                </div>
-            </div>}
+            )}
             <div style={{
                 display: 'flex',
                 width: '100%'
