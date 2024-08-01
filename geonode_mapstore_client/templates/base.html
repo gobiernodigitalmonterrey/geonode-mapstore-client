@@ -30,13 +30,11 @@
         $('.dropdown-toggle').dropdown();
     </script>
     <!-- Google tag (gtag.js) -->
-    {% if GEONODE_SETTINGS.ANALYTICS_ID %}
+    {% if GEONODE_SETTINGS.ANALYTICS_ID != "" %}
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS.ANALYTICS_ID }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
+            function gtag() {dataLayer.push(arguments)}
             gtag('js', new Date());
             gtag('config', '{{ GEONODE_SETTINGS.ANALYTICS_ID }}');
         </script>
