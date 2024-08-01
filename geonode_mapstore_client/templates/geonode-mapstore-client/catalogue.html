@@ -61,7 +61,24 @@
             <script type="text/javascript">
                 // enable dropdown functionalities
                 $('.dropdown-toggle').dropdown();
+                console.log("GEONODE_SETTINGS.ANALYTICS_ID: {{ GEONODE_SETTINGS.ANALYTICS_ID }}");
             </script>
+            <!-- Google tag Catalogue (gtag.js) -->
+            {% if GEONODE_SETTINGS.ANALYTICS_ID != "" %}
+                <script async
+                        src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS.ANALYTICS_ID }}"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+
+                    function gtag() {
+                        dataLayer.push(arguments)
+                    }
+
+                    gtag('js', new Date());
+                    gtag('config', '{{ GEONODE_SETTINGS.ANALYTICS_ID }}');
+                </script>
+            {% endif %}
+            <!-- /Google tag Catalogue (gtag.js) -->
         {% endblock %}
     </div>
 </div>
