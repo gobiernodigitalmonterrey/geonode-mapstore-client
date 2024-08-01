@@ -2,108 +2,124 @@
 {% load client_version %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/static/fonts/montserrat.css" rel="stylesheet">
-        <link href="{% static 'mapstore/dist/themes/geonode.css' %}?{% client_version %}" rel="stylesheet" />
-        <title>{{ SITE_NAME }}</title>
-        <link rel="shortcut icon" href="{% static 'geonode/img/favicon.ico' %}" />
-        {% include './geonode-mapstore-client/snippets/loader_style.html' %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/fonts/montserrat.css" rel="stylesheet">
+    <link href="{% static 'mapstore/dist/themes/geonode.css' %}?{% client_version %}" rel="stylesheet"/>
+    <title>{{ SITE_NAME }}</title>
+    <link rel="shortcut icon" href="{% static 'geonode/img/favicon.ico' %}"/>
+    {% include './geonode-mapstore-client/snippets/loader_style.html' %}
 
-        {% block custom_theme %}
-            {% include './geonode-mapstore-client/snippets/custom_theme.html' %}
+    {% block custom_theme %}
+        {% include './geonode-mapstore-client/snippets/custom_theme.html' %}
+    {% endblock %}
+
+    {% block extra_style %}
+    {% endblock %}
+</head>
+<body class="msgapi ms2" data-ms2-container="ms2">
+<div class="gn-page-wrapper {% if request.user_agent.is_mobile %}gn-mobile{% else %}gn-desktop{% endif %}">
+    {% include './geonode-mapstore-client/_geonode_config.html' %}
+    <div class="gn-theme gn-homepage">
+        {% block header %}
+            {% include './geonode-mapstore-client/snippets/header.html' %}
         {% endblock %}
 
-        {% block extra_style %}
+        {% block container %}
+            <h1>HOLA</h1>
         {% endblock %}
-    </head>
-    <body class="msgapi ms2" data-ms2-container="ms2" >
-        <div class="gn-page-wrapper {% if request.user_agent.is_mobile %}gn-mobile{% else %}gn-desktop{% endif %}">
-            {% include './geonode-mapstore-client/_geonode_config.html' %}
-            <div class="gn-theme gn-homepage">
-                {% block header %}
-                    {% include './geonode-mapstore-client/snippets/header.html' %}
-                {% endblock %}
 
-                {% block container %}
-                    <h1>HOLA</h1>
-                {% endblock %}
-
-                {% block ms_scripts %}
-                    <div id="ms-container">
-                    <!-- EJES-->
-                    <div class="row align-items-start contenedor-icon">
-                                <div class="col contenedor-icon">
-        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
-            <div>
-                <i class="fa fa-building"></i>
-            </div>
-            <div>
-                Infraestructura pública y movilidad
-            </div>
-        </a>
-    </div>
-                                <div class="col contenedor-icon">
-        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
-            <div>
-                <i class="fa fa-male"></i>
-            </div>
-            <div>
-                Desarrollo social y humano
-            </div>
-        </a>
-    </div>
-                                <div class="col contenedor-icon">
-        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
-            <div>
-                <i class="fa fa-home"></i>
-            </div>
-            <div>
-                Territorio y vivienda
-            </div>
-        </a>
-    </div>
-                                <div class="col contenedor-icon">
-        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
-            <div>
-                <i class="fa fa-university"></i>
-            </div>
-            <div>
-                Economía y administración gubernamental
-            </div>
-        </a>
-    </div>
-                                <div class="col contenedor-icon">
-        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
-            <div>
-                <i class="fa fa-heartbeat"></i>
-            </div>
-            <div>
-                Salud y medio ambiente
-            </div>
-        </a>
-    </div>
+        {% block ms_scripts %}
+            <div id="ms-container">
+                <!-- EJES-->
+                <div class="row align-items-start contenedor-icon">
+                    <div class="col contenedor-icon">
+                        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
+                            <div>
+                                <i class="fa fa-building"></i>
                             </div>
+                            <div>
+                                Infraestructura pública y movilidad
+                            </div>
+                        </a>
                     </div>
-                    <script id="gn-script" src="{% static 'mapstore/dist/js/gn-components.js' %}?{% client_version %}"></script>
-                {% endblock %}
-
-                {% block footer %}
-                    <h1>HOLA</h1>
-                    {% include './geonode-mapstore-client/snippets/footer.html' %}
-                {% endblock %}
-
-                {% block scripts %}
-                    <script src="{% static "lib/js/jquery.min.js" %}"></script>
-                    <script src="{% static "lib/js/bootstrap.min.js" %}"></script>
-                    <script type="text/javascript">
-                        // enable dropdown functionalities
-                        $('.dropdown-toggle').dropdown();
-                    </script>
-                {% endblock %}
+                    <div class="col contenedor-icon">
+                        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
+                            <div>
+                                <i class="fa fa-male"></i>
+                            </div>
+                            <div>
+                                Desarrollo social y humano
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col contenedor-icon">
+                        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
+                            <div>
+                                <i class="fa fa-home"></i>
+                            </div>
+                            <div>
+                                Territorio y vivienda
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col contenedor-icon">
+                        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
+                            <div>
+                                <i class="fa fa-university"></i>
+                            </div>
+                            <div>
+                                Economía y administración gubernamental
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col contenedor-icon">
+                        <a href="https://geonode.appsmty.gob.mx/maps/269/metadata_detail">
+                            <div>
+                                <i class="fa fa-heartbeat"></i>
+                            </div>
+                            <div>
+                                Salud y medio ambiente
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </body>
+            <script id="gn-script" src="{% static 'mapstore/dist/js/gn-components.js' %}?{% client_version %}"></script>
+        {% endblock %}
+
+        {% block footer %}
+            <h1>HOLA</h1>
+            {% include './geonode-mapstore-client/snippets/footer.html' %}
+        {% endblock %}
+
+        {% block scripts %}
+            <script src="{% static "lib/js/jquery.min.js" %}"></script>
+            <script src="{% static "lib/js/bootstrap.min.js" %}"></script>
+            <script type="text/javascript">
+                // enable dropdown functionalities
+                $('.dropdown-toggle').dropdown();
+            </script>
+            <!-- Google tag page (gtag.js) -->
+            {% if GEONODE_SETTINGS["ANALYTICS_ID"] %}
+                <script async
+                        src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS["ANALYTICS_ID"] }}"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+
+                    function gtag() {
+                        dataLayer.push(arguments);
+                    }
+
+                    gtag('js', new Date());
+                    gtag('config', '{{ GEONODE_SETTINGS["ANALYTICS_ID"] }}');
+                </script>
+            {% endif %}
+            <!-- /Google tag page (gtag.js) -->
+        {% endblock %}
+    </div>
+</div>
+</body>
 </html>
