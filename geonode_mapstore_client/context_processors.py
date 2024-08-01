@@ -19,7 +19,7 @@ def resource_urls(request):
     """Global values to pass to templates"""
     defaults = dict(GEOAPPS=["GeoStory", "GeoDashboard"])
     defaults["GEONODE_SETTINGS"] = {
-        "ANALYTICS_ID": getattr(settings, "ANALYTICS_ID", None),
+        "ANALYTICS_ID": getattr(settings, "ANALYTICS_ID", False),
         "MAP_BASELAYERS": getattr(settings, "MAPSTORE_BASELAYERS", []),
         "MAP_BASELAYERS_SOURCES": getattr(settings, "MAPSTORE_BASELAYERS_SOURCES", {}),
         "CATALOGUE_SERVICES": getattr(settings, "MAPSTORE_CATALOGUE_SERVICES", {}),
