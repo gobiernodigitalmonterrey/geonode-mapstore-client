@@ -30,15 +30,15 @@
         $('.dropdown-toggle').dropdown();
     </script>
     <!-- Google tag (gtag.js) -->
-    {% if GEONODE_SETTINGS["ANALYTICS_ID"] %}
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS["ANALYTICS_ID"] }}"></script>
+    {% if GEONODE_SETTINGS.ANALYTICS_ID %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS.ANALYTICS_ID }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments);
             }
             gtag('js', new Date());
-            gtag('config', '{{ GEONODE_SETTINGS["ANALYTICS_ID"] }}');
+            gtag('config', '{{ GEONODE_SETTINGS.ANALYTICS_ID }}');
         </script>
     {% endif %}
     <!-- /Google tag (gtag.js) -->

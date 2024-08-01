@@ -103,9 +103,9 @@
                 $('.dropdown-toggle').dropdown();
             </script>
             <!-- Google tag page (gtag.js) -->
-            {% if GEONODE_SETTINGS["ANALYTICS_ID"] %}
+            {% if GEONODE_SETTINGS.ANALYTICS_ID %}
                 <script async
-                        src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS["ANALYTICS_ID"] }}"></script>
+                        src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS.ANALYTICS_ID }}"></script>
                 <script>
                     window.dataLayer = window.dataLayer || [];
 
@@ -114,7 +114,7 @@
                     }
 
                     gtag('js', new Date());
-                    gtag('config', '{{ GEONODE_SETTINGS["ANALYTICS_ID"] }}');
+                    gtag('config', '{{ GEONODE_SETTINGS.ANALYTICS_ID }}');
                 </script>
             {% endif %}
             <!-- /Google tag page (gtag.js) -->
