@@ -28,7 +28,9 @@
     <script type="text/javascript">
         // enable dropdown functionalities
         $('.dropdown-toggle').dropdown();
+        console.log("Hola");
     </script>
+
     <!-- Google tag (gtag.js) -->
     {% if GEONODE_SETTINGS.ANALYTICS_ID != "" %}
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ GEONODE_SETTINGS.ANALYTICS_ID }}"></script>
